@@ -1,0 +1,13 @@
+name = "Create: Redstone Additions"
+filename = "create_redstone_additions-1.0.5.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/AoEzBC2h/versions/4P4QJB3m/create_redstone_additions-1.0.5.jar"
+hash-format = "sha512"
+hash = "3f4e53da5629ae9cca299425b53a7f54c65821299eed23f68463ca956b69585f119439383e5d380a9464010dc17c6aa39d94e54ef24c5ad9cf26fb9df875c64c"
+
+[update]
+[update.modrinth]
+mod-id = "AoEzBC2h"
+version = "4P4QJB3m"

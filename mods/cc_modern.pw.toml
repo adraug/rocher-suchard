@@ -1,0 +1,13 @@
+name = "CC: Modern"
+filename = "cc_modern-0.1.1.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/Ftp3q6oJ/versions/R5D4LN9O/cc_modern-0.1.1.jar"
+hash-format = "sha512"
+hash = "78612a0849e8ee91f0b7d9d55e1b7a631a41bfb410b377038e3ada6759fbfee39183e74740fd4134e2a0f7c86bfa3b82b7032ca5b66bb680d73bc93b55fd0470"
+
+[update]
+[update.modrinth]
+mod-id = "Ftp3q6oJ"
+version = "R5D4LN9O"

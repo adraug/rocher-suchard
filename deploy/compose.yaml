@@ -1,0 +1,32 @@
+services:
+  packwiz:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+      target: packwiz-source
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://localhost:8080/pack.toml"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+
+  minecraft:
+    image: itzg/minecraft-server:java21
+    depends_on:
+      packwiz:
+        condition: service_healthy
+    ports:
+      - "25565:25565"
+    environment:
+      EULA: "TRUE"
+      TYPE: "NEOFORGE"
+      VERSION: "1.21.1"
+      NEOFORGE_VERSION: "21.1.251"
+      PACKWIZ_URL: "http://packwiz:8080/pack.toml"
+      MEMORY: "4G"
+      MOTD: "Rocher Suchard — test local Packwiz"
+    volumes:
+      - ./data:/data
+    stdin_open: true
+    tty: true

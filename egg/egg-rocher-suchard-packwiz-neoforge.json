@@ -1,0 +1,56 @@
+{
+  "_comment": "DO NOT EDIT: generated for Calagopus/Pterodactyl import.",
+  "meta": {
+    "version": "PTDL_v2",
+    "update_url": null
+  },
+  "exported_at": "2026-09-22T00:00:00+00:00",
+  "name": "Rocher Suchard - Packwiz NeoForge",
+  "author": "admin@calagopus.local",
+  "description": "Installe NeoForge et synchronise les fichiers serveur depuis une source Packwiz a chaque demarrage.",
+  "features": [
+    "eula",
+    "java_version",
+    "pid_limit"
+  ],
+  "docker_images": {
+    "Java 21": "ghcr.io/pterodactyl/yolks:java_21"
+  },
+  "file_denylist": [],
+  "startup": "if [ ! -f \"libraries/net/neoforged/neoforge/{{NEOFORGE_VERSION}}/unix_args.txt\" ]; then curl -fsSL --retry 3 --retry-delay 2 \"https://maven.neoforged.net/releases/net/neoforged/neoforge/{{NEOFORGE_VERSION}}/neoforge-{{NEOFORGE_VERSION}}-installer.jar\" -o neoforge-installer.jar || exit 1; java -jar neoforge-installer.jar --installServer || exit 1; rm -f neoforge-installer.jar; fi; java -jar packwiz-installer-bootstrap.jar -g -s server \"{{PACKWIZ_URL}}\" || exit 1; exec java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true @user_jvm_args.txt @libraries/net/neoforged/neoforge/{{NEOFORGE_VERSION}}/unix_args.txt nogui",
+  "config": {
+    "files": "{\n    \"server.properties\": {\n        \"parser\": \"properties\",\n        \"find\": {\n            \"server-ip\": \"0.0.0.0\",\n            \"server-port\": \"{{server.build.default.port}}\",\n            \"query.port\": \"{{server.build.default.port}}\"\n        }\n    }\n}",
+    "startup": "{\n    \"done\": \")! For help, type \\\"help\\\"\"\n}",
+    "logs": "{}",
+    "stop": "stop"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\nset -euo pipefail\n\ncd /mnt/server\napt-get update\napt-get install -y --no-install-recommends ca-certificates curl\n\ncurl -fsSL --retry 3 --retry-delay 2 \\\n  \"https://maven.neoforged.net/releases/net/neoforged/neoforge/${NEOFORGE_VERSION}/neoforge-${NEOFORGE_VERSION}-installer.jar\" \\\n  -o neoforge-installer.jar\ncurl -fsSL --retry 3 --retry-delay 2 \\\n  \"https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar\" \\\n  -o packwiz-installer-bootstrap.jar\n\nprintf 'eula=true\\n' > eula.txt\n",
+      "container": "ghcr.io/pterodactyl/installers:debian",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Packwiz URL",
+      "description": "URL HTTP(S) publique ou accessible depuis le noeud Calagopus, pointant directement vers pack.toml.",
+      "env_variable": "PACKWIZ_URL",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|url|max:255",
+      "field_type": "text"
+    },
+    {
+      "name": "Version NeoForge",
+      "description": "Version NeoForge du pack. Doit correspondre a la valeur neoforge de pack.toml.",
+      "env_variable": "NEOFORGE_VERSION",
+      "default_value": "21.1.251",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string|max:32",
+      "field_type": "text"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+name = "CC: WATERMeDIA"
+filename = "ccwatermedia-neoforge-1.1.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/9f58KyJG/versions/A1vNEQhs/ccwatermedia-neoforge-1.1.jar"
+hash-format = "sha512"
+hash = "7a061bd63938116a803cb41c06152d2479cdcccbc9a353f3e636984cb25791e430c07243396edd4aaeaaa548e27af0effc43896995d552eba2a50e92aa9a931a"
+
+[update]
+[update.modrinth]
+mod-id = "9f58KyJG"
+version = "A1vNEQhs"
