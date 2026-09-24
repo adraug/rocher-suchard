@@ -1,0 +1,90 @@
+name: Release modpack
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modpack-release
+  queue: max
+
+jobs:
+  detect-merge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      merged: ${{ steps.detect.outputs.merged }}
+    steps:
+      - name: Check for a merged pull request
+        id: detect
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          pulls=$(gh api --paginate "repos/$GH_REPO/commits/$COMMIT/pulls")
+          merged=$(jq -s --arg sha "$COMMIT" 'add | any(.merged_at != null and .base.ref == "main" and .merge_commit_sha == $sha)' <<< "$pulls")
+          echo "merged=$merged" >> "$GITHUB_OUTPUT"
+  release:
+    needs: detect-merge
+    if: needs.detect-merge.outputs.merged == 'true'
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.4'
+          cache: false
+      - name: Install Packwiz
+        run: go install github.com/packwiz/packwiz@v0.0.0-20260906154125-ef87d964f8cb
+      - name: Prepare version
+        id: version
+        run: python3 .github/scripts/release.py
+      - name: Export modpack
+        run: make export
+      - name: Tag and publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ steps.version.outputs.tag }}
+          PREVIOUS_TAG: ${{ steps.version.outputs.previous_tag }}
+          REUSED: ${{ steps.version.outputs.reused }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$REUSED" == false ]]; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add pack.toml index.toml
+            git commit -m "chore: release $TAG"
+            git tag "$TAG"
+            git push origin "refs/tags/$TAG"
+          else
+            git diff --exit-code -- pack.toml index.toml
+          fi
+          # An API/network error must fail instead of being mistaken for a missing release.
+          releases=$(gh api --paginate "repos/$GH_REPO/releases" --jq '.[] | .tag_name')
+          if ! grep -Fxq "$TAG" <<< "$releases"; then
+            args=(--draft --verify-tag --title "Rocher Suchard ${TAG#v}" --generate-notes)
+            if [[ -n "$PREVIOUS_TAG" ]]; then
+              args+=(--notes-start-tag "$PREVIOUS_TAG")
+            fi
+            gh release create "$TAG" "${args[@]}"
+          fi
+          if [[ $(gh release view "$TAG" --json isDraft --jq .isDraft) == true ]]; then
+            (cd dist && sha256sum -- *.mrpack > SHA256SUMS.txt)
+            gh release upload "$TAG" dist/*.mrpack dist/SHA256SUMS.txt --clobber
+            gh release edit "$TAG" --draft=false --latest
+          fi
