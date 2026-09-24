@@ -42,6 +42,21 @@ excluded from Git and Packwiz exports and may be regenerated locally by mods.
 
 ## Daily workflow
 
+### Chunk loading
+
+Chunk Loaders replaces FTB Chunks, FTB Teams, and FTB Library. Install the
+updated pack on both clients and the server. Place a chunk loader, right-click
+it, and select the chunks to keep loaded in its map. No teams or claims are
+needed. Available tiers cover a single chunk or areas up to 3×3, 5×5, and 7×7.
+
+Existing FTB forced chunks are not migrated: place loaders in the areas that
+should remain active. Previous FTB claims no longer protect those areas.
+Before release, check loading after disconnecting and restarting the server,
+including a Create machine in a selected chunk. The original Prism client
+must not be assumed compatible with this content change.
+
+### Commands
+
 Edit `pack.toml`, a mod metadata file, or a configuration file, then refresh
 the Packwiz index and inspect the result:
 
