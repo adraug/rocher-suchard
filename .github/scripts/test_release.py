@@ -88,13 +88,15 @@ class ReleaseTests(unittest.TestCase):
         result = build()
         self.assertEqual(result.returncode, 0, result.stderr)
         checksums = (dist / "SHA256SUMS.txt").read_text().splitlines()
-        self.assertEqual(len(checksums), 5)
+        self.assertEqual(len(checksums), 6)
         for line in checksums:
             digest, name = line.split("  ", 1)
             self.assertEqual(hashlib.sha256((dist / name).read_bytes()).hexdigest(), digest)
             self.assertNotEqual(name, "stale.mrpack")
             self.assertNotIn(" ", name)
         self.assertEqual((dist / "Rocher-Suchard-1.1.mrpack").read_bytes(),
+                         (dist / "Test Pack-1.1.mrpack").read_bytes())
+        self.assertEqual((dist / "Rocher-Suchard.mrpack").read_bytes(),
                          (dist / "Test Pack-1.1.mrpack").read_bytes())
         source = dist / "Rocher-Suchard-1.1-packwiz.zip"
         before = source.read_bytes()

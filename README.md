@@ -4,6 +4,71 @@ Rocher Suchard is a NeoForge modpack for Minecraft 1.21.1. This repository is
 the Packwiz source of the pack; it is the reference from which the distributable
 Modrinth archive is built.
 
+
+## Installation du pack
+
+La façon la plus simple d'installer la dernière version est d'utiliser l'archive
+Modrinth publiée avec un nom stable :
+
+**[Installer la dernière version de Rocher Suchard](https://github.com/adraug/rocher-suchard/releases/latest/download/Rocher-Suchard.mrpack)**
+
+Cette URL suit toujours la dernière release GitHub publiée. Une archive versionnée
+`Rocher-Suchard-<version>.mrpack` reste également disponible dans chaque release
+pour conserver un lien immuable vers une version précise.
+
+### Modrinth App
+
+1. Cliquez sur **[Installer la dernière version](https://github.com/adraug/rocher-suchard/releases/latest/download/Rocher-Suchard.mrpack)**.
+2. Ouvrez Modrinth App.
+3. Importez le fichier `.mrpack` téléchargé comme nouveau profil/instance.
+4. Lancez l'instance créée.
+
+Le lien reste identique d'une release à l'autre : cliquer dessus récupère toujours
+le dernier `.mrpack` publié. Modrinth App ne documente pas actuellement un import
+direct depuis une URL externe équivalent à Prism ; une instance déjà importée
+n'est donc pas mise à jour automatiquement par ce simple lien.
+
+### Prism Launcher
+
+Prism peut utiliser directement l'URL stable, sans téléchargement manuel :
+
+1. Ouvrez **Add Instance** puis **Import**.
+2. Collez cette URL dans le champ d'import :
+
+   ```text
+   https://github.com/adraug/rocher-suchard/releases/latest/download/Rocher-Suchard.mrpack
+   ```
+
+3. Validez l'import puis lancez l'instance.
+
+Sur les versions récentes de Prism Launcher, un pack local peut également être
+mis à jour depuis son URL source. L'URL reste donc la même lorsque Rocher Suchard
+passe de `1.1.1` à `1.1.2`, `1.2.0`, etc.
+
+Pour figer une version précise, utilisez à la place l'asset
+`Rocher-Suchard-<version>.mrpack` de la release correspondante.
+
+### Client manuel — pour les plus téméraires
+
+Le pack peut aussi être installé sans importer le `.mrpack`, en partant d'une
+instance Minecraft **1.21.1** avec **NeoForge 21.1.251**.
+
+1. Installez Minecraft 1.21.1 et NeoForge 21.1.251.
+2. Placez `packwiz-installer-bootstrap.jar` dans le dossier de l'instance.
+3. Depuis ce dossier, synchronisez les fichiers client avec :
+
+```sh
+java -jar packwiz-installer-bootstrap.jar -g -s client \
+  "https://raw.githubusercontent.com/adraug/rocher-suchard/latest/pack.toml"
+```
+
+4. Lancez ensuite le client NeoForge normalement.
+
+Dans ce mode, relancer la commande Packwiz avant Minecraft permet de récupérer
+les changements de la branche `latest`. C'est le mode le plus proche du
+fonctionnement automatique utilisé côté serveur, mais il demande de gérer
+vous-même le lancement de Packwiz et de NeoForge.
+
 ## Release policy
 
 Version 1.0 is the original pack shared by friends, imported from Prism Launcher.
@@ -118,13 +183,15 @@ version (`1.1` becomes `1.1.0`); subsequent merges increment the patch version
 
 Each release includes:
 
-- `Rocher-Suchard-<version>.mrpack` for launchers (release filenames use hyphens).
+- `Rocher-Suchard-<version>.mrpack` for an immutable, versioned launcher download.
+- `Rocher-Suchard.mrpack` as the stable alias used by
+  `/releases/latest/download/Rocher-Suchard.mrpack`.
 - `pack.toml` and `index.toml` for inspection or download.
 - `Rocher-Suchard-<version>-packwiz.zip`, containing the complete Packwiz tree
   (pack, index, mod metadata, configurations and other indexed files), ready to
   extract at the root of an HTTP(S) server. Mod binaries are downloaded separately.
 - `egg-rocher-suchard-packwiz-neoforge.json` for Calagopus/Pterodactyl.
-- `SHA256SUMS.txt`, covering all five assets above. From the download directory,
+- `SHA256SUMS.txt`, covering all six assets above. From the download directory,
   run `sha256sum -c SHA256SUMS.txt` (Linux) or `shasum -a 256 -c SHA256SUMS.txt`
   (macOS). GitHub's automatic source archives are not included in this manifest.
 - GitHub-generated release notes listing merged pull requests and contributors.
