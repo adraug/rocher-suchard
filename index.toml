@@ -982,11 +982,6 @@ hash = "fe642f391d1da67b5308987fb8ed3f4e1914d92bb181d8c05c6f5635e886b635"
 metafile = true
 
 [[files]]
-file = "mods/create-numismatics-advancement-seeker.pw.toml"
-hash = "efb1b9748cd71702f38cef0911466dd635dc5ad2c6b7cc61da10346a379562ea"
-metafile = true
-
-[[files]]
 file = "mods/create-prismatic-shine.pw.toml"
 hash = "cbc7ea97d76516a5005a86388c65aaf36ff1e0558272c2e09a9533d3a4d5e82f"
 metafile = true
@@ -1259,11 +1254,6 @@ metafile = true
 [[files]]
 file = "mods/neoenchant.pw.toml"
 hash = "929fd2e18b356d883f6fdeee9b515f4026d320f0d0610656534f3db3b4d21d3c"
-metafile = true
-
-[[files]]
-file = "mods/numismatics.pw.toml"
-hash = "840eb517a83c586b9f543ab9781d4c8529b6fedf2d679f411577c7a583e50fe5"
 metafile = true
 
 [[files]]
