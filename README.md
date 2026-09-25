@@ -10,36 +10,42 @@ Modrinth archive is built.
 La façon la plus simple d'installer la dernière version est d'utiliser l'archive
 Modrinth publiée avec un nom stable :
 
-```text
-https://github.com/adraug/rocher-suchard/releases/latest/download/Rocher-Suchard.mrpack
-```
+**[Installer la dernière version de Rocher Suchard](https://github.com/adraug/rocher-suchard/releases/latest/download/Rocher-Suchard.mrpack)**
 
-Ce lien suit toujours la dernière release GitHub publiée. Une archive versionnée
+Cette URL suit toujours la dernière release GitHub publiée. Une archive versionnée
 `Rocher-Suchard-<version>.mrpack` reste également disponible dans chaque release
 pour conserver un lien immuable vers une version précise.
 
 ### Modrinth App
 
-1. Téléchargez `Rocher-Suchard.mrpack` avec le lien ci-dessus.
+1. Cliquez sur **[Installer la dernière version](https://github.com/adraug/rocher-suchard/releases/latest/download/Rocher-Suchard.mrpack)**.
 2. Ouvrez Modrinth App.
-3. Importez le fichier `.mrpack` comme nouveau profil/instance.
+3. Importez le fichier `.mrpack` téléchargé comme nouveau profil/instance.
 4. Lancez l'instance créée.
 
-L'archive embarque les informations Minecraft, NeoForge, mods et configurations
-nécessaires. Le téléchargement depuis l'URL `latest` pointe toujours vers la
-release la plus récente, mais une instance déjà importée n'est pas mise à jour
-automatiquement par ce simple lien : réimportez la nouvelle archive lorsque vous
-souhaitez passer à une nouvelle release.
+Le lien reste identique d'une release à l'autre : cliquer dessus récupère toujours
+le dernier `.mrpack` publié. Modrinth App ne documente pas actuellement un import
+direct depuis une URL externe équivalent à Prism ; une instance déjà importée
+n'est donc pas mise à jour automatiquement par ce simple lien.
 
 ### Prism Launcher
 
-1. Téléchargez `Rocher-Suchard.mrpack`.
-2. Dans Prism Launcher, choisissez **Add Instance** puis l'import d'un modpack
-   depuis un fichier local.
-3. Sélectionnez l'archive `.mrpack`.
-4. Validez l'instance et lancez-la.
+Prism peut utiliser directement l'URL stable, sans téléchargement manuel :
 
-Pour installer une version précise plutôt que la dernière, utilisez l'asset
+1. Ouvrez **Add Instance** puis **Import**.
+2. Collez cette URL dans le champ d'import :
+
+   ```text
+   https://github.com/adraug/rocher-suchard/releases/latest/download/Rocher-Suchard.mrpack
+   ```
+
+3. Validez l'import puis lancez l'instance.
+
+Sur les versions récentes de Prism Launcher, un pack local peut également être
+mis à jour depuis son URL source. L'URL reste donc la même lorsque Rocher Suchard
+passe de `1.1.1` à `1.1.2`, `1.2.0`, etc.
+
+Pour figer une version précise, utilisez à la place l'asset
 `Rocher-Suchard-<version>.mrpack` de la release correspondante.
 
 ### Client manuel — pour les plus téméraires
