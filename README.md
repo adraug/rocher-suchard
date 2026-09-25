@@ -108,21 +108,47 @@ updates on every server start.
 
 The `Release modpack` GitHub Action runs after each pull request merged into
 `main`, including squash and rebase merges. Closing an unmerged pull request or
-pushing directly does not publish a release. It increments the patch version
-(`1.1` → `1.1.1` → `1.1.2`), runs `make export`, and publishes a GitHub release
-with the `.mrpack`, `SHA256SUMS.txt`, source archives, and GitHub-generated
-release notes listing merged pull requests and contributors.
+pushing directly does not publish a release. The first release uses the base
+version (`1.1` becomes `1.1.0`); subsequent merges increment the patch version
+(`1.1.1`, `1.1.2`, ...). A higher base version starts a new series at that version.
+
+Each release includes:
+
+- `Rocher Suchard-<version>.mrpack` for launchers.
+- `pack.toml` and `index.toml` for inspection or download.
+- `Rocher-Suchard-<version>-packwiz.zip`, containing the complete Packwiz tree
+  (pack, index, mod metadata, configurations and other indexed files), ready to
+  extract at the root of an HTTP(S) server. Mod binaries are downloaded separately.
+- `egg-rocher-suchard-packwiz-neoforge.json` for Calagopus/Pterodactyl.
+- `SHA256SUMS.txt`, covering all five assets above. From the download directory,
+  run `sha256sum -c SHA256SUMS.txt` (Linux) or `shasum -a 256 -c SHA256SUMS.txt`
+  (macOS). GitHub's automatic source archives are not included in this manifest.
+- GitHub-generated release notes listing merged pull requests and contributors.
+
+For Calagopus, set **Packwiz URL** to the complete published source:
+
+```text
+https://raw.githubusercontent.com/adraug/rocher-suchard/latest/pack.toml
+```
+
+The `latest` branch points to the latest published release commit, including
+all files needed by Packwiz. It is updated only after release assets are uploaded
+and the release is public. To pin a server, replace `latest` with `v1.1.0` (or
+another release tag). Keep NeoForge in the panel aligned with the selected pack.
+Do not use `/releases/latest/download/pack.toml` as the installer URL: although
+that URL downloads the file, release assets do not expose the required directory
+structure for its relative references.
 
 The version is stored in `pack.toml` in the release tag and exported archive.
-`main` retains the base version; future versions are allocated from the highest
-version among existing `vX.Y.Z` tags and `pack.toml`. Increase the base version
-manually to start a new minor/major series. Release commits are attached to the
-exact merged commit, without pushing generated commits back to `main`.
+`main` retains the base version; future versions are allocated from existing
+`vX.Y.Z` tags and `pack.toml`. Release commits are attached to the exact merged
+commit, without pushing generated commits back to `main`.
 
 Releases run serially (up to 100 pending runs). Re-run a failed Actions run to
 resume its existing tag/draft; published releases are not overwritten. The
 workflow uses the built-in `GITHUB_TOKEN` with `contents: write`; no custom
-secret is needed. Repository rules must allow this token to create `v*` tags.
+secret is needed. Repository rules must allow this token to create `v*` tags
+and update the generated `latest` branch, including non-fast-forward updates.
 Client/server testing remains a prerequisite before merging content changes.
 
 ## Pack maintenance
