@@ -38,8 +38,13 @@ def prepare():
         path = Path("pack.toml")
         content = path.read_text()
         base = version(tomllib.loads(content)["version"])
-        major, minor, patch = max([base, *(version(t[1:]) for t in tags)])
-        value = f"{major}.{minor}.{patch + 1}"
+        latest = max((version(t[1:]) for t in tags), default=None)
+        if latest is None or base > latest:
+            major, minor, patch = base
+        else:
+            major, minor, patch = latest
+            patch += 1
+        value = f"{major}.{minor}.{patch}"
         tag = f"v{value}"
         content, count = re.subn(r'^version = "[^"]+"$', f'version = "{value}"', content, count=1, flags=re.M)
         if count != 1:

@@ -16,8 +16,18 @@ serveur, et qui répond directement avec le `pack.toml` de ce dépôt. Par
 exemple :
 
 ```text
-https://packs.example.net/rocher-suchard/pack.toml
+https://raw.githubusercontent.com/adraug/rocher-suchard/latest/pack.toml
 ```
+
+Cette URL suit la dernière release publiée. Pour figer la version, remplacez
+`latest` par `v1.1.0` (ou le tag souhaité). Le prochain redémarrage applique
+les mises à jour si vous suivez `latest` ; gardez clients et serveur sur la même
+version du pack.
+
+La release contient aussi l'egg, une archive `*-packwiz.zip` pour auto-héberger
+la source complète, et `SHA256SUMS.txt`. L'URL GitHub
+`/releases/latest/download/pack.toml` sert au téléchargement du fichier seul,
+pas à l'installation : les sous-dossiers nécessaires n'y sont pas disponibles.
 
 Cette source doit aussi exposer `index.toml`, les fichiers de configuration et
 les métadonnées Packwiz référencés par l'index. Elle ne doit pas pointer vers
