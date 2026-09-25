@@ -102,6 +102,10 @@ updates on every server start.
 
 ## Before a release
 
+Read the [1.1.0 changelog](changelogs/1.1.0.md) for additions and migration steps.
+Version-specific notes in `changelogs/<version>.md` are included in the GitHub
+release before the automatically generated list of pull requests and contributors.
+
 1. Run `make export` and install the `.mrpack` in a fresh launcher profile.
 2. Join the target server and verify client/server compatibility.
 3. Merge the pull request into `main` to publish automatically.

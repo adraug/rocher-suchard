@@ -80,6 +80,10 @@ jobs:
           releases=$(gh api --paginate "repos/$GH_REPO/releases" --jq '.[] | .tag_name')
           if ! grep -Fxq "$TAG" <<< "$releases"; then
             args=(--draft --verify-tag --title "Rocher Suchard ${TAG#v}" --generate-notes)
+            notes_file="changelogs/${TAG#v}.md"
+            if [[ -f "$notes_file" ]]; then
+              args+=(--notes-file "$notes_file")
+            fi
             if [[ -n "$PREVIOUS_TAG" ]]; then
               args+=(--notes-start-tag "$PREVIOUS_TAG")
             fi
