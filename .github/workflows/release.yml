@@ -1,6 +1,7 @@
 name: Release modpack
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
 
@@ -22,6 +23,7 @@ jobs:
     steps:
       - name: Check for a merged pull request
         id: detect
+        if: github.event_name == 'push'
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
@@ -33,7 +35,9 @@ jobs:
           echo "merged=$merged" >> "$GITHUB_OUTPUT"
   release:
     needs: detect-merge
-    if: needs.detect-merge.outputs.merged == 'true'
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'workflow_dispatch' || needs.detect-merge.outputs.merged == 'true')
     permissions:
       contents: write
     runs-on: ubuntu-latest

@@ -177,8 +177,17 @@ release before the automatically generated list of pull requests and contributor
 
 The `Release modpack` GitHub Action runs after each pull request merged into
 `main`, including squash and rebase merges. Closing an unmerged pull request or
-pushing directly does not publish a release. The first release uses the base
-version (`1.1` becomes `1.1.0`); subsequent merges increment the patch version
+pushing directly does not publish a release automatically. To publish the current
+`main` manually, open **Actions → Release modpack → Run workflow**, select `main`,
+and click **Run workflow**. You can also run:
+
+```sh
+gh workflow run release.yml --ref main
+```
+
+Manual publication is restricted to `main` and does not require a pull request.
+The first release uses the base version (`1.1` becomes `1.1.0`); subsequent
+releases from new commits increment the patch version
 (`1.1.1`, `1.1.2`, ...). A higher base version starts a new series at that version.
 
 Each release includes:
@@ -212,7 +221,7 @@ structure for its relative references.
 
 The version is stored in `pack.toml` in the release tag and exported archive.
 `main` retains the base version; future versions are allocated from existing
-`vX.Y.Z` tags and `pack.toml`. Release commits are attached to the exact merged
+`vX.Y.Z` tags and `pack.toml`. Release commits are attached to the exact triggering
 commit, without pushing generated commits back to `main`.
 
 Releases run serially (up to 100 pending runs). Re-run a failed Actions run to
