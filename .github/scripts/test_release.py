@@ -93,6 +93,9 @@ class ReleaseTests(unittest.TestCase):
             digest, name = line.split("  ", 1)
             self.assertEqual(hashlib.sha256((dist / name).read_bytes()).hexdigest(), digest)
             self.assertNotEqual(name, "stale.mrpack")
+            self.assertNotIn(" ", name)
+        self.assertEqual((dist / "Rocher-Suchard-1.1.mrpack").read_bytes(),
+                         (dist / "Test Pack-1.1.mrpack").read_bytes())
         source = dist / "Rocher-Suchard-1.1-packwiz.zip"
         before = source.read_bytes()
         with zipfile.ZipFile(source) as archive:
