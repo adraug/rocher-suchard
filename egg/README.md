@@ -52,6 +52,10 @@ make refresh
    au serveur sont téléchargés ; les démarrages suivants ne récupèrent que les
    différences détectées par Packwiz.
 
+La commande de démarrage de l'egg appelle `bash start.sh`. La logique conditionnelle
+NeoForge/Packwiz reste dans ce script afin d'éviter que l'entrypoint Pterodactyl
+n'interprète prématurément les constructions shell (`if`, `then`, etc.).
+
 L'egg écrit également `eula=true` et configure `server.properties` avec le
 port attribué par le panel.
 
