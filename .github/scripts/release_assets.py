@@ -45,7 +45,10 @@ def prepare():
             info.external_attr = 0o100644 << 16
             archive.writestr(info, path.read_bytes())
 
-    assets = [mrpack, source]
+    # GitHub rewrites spaces in uploaded names; checksum the exact published name.
+    published_mrpack = dist / f'Rocher-Suchard-{pack["version"]}.mrpack'
+    shutil.copyfile(mrpack, published_mrpack)
+    assets = [published_mrpack, source]
     for path in [root / "pack.toml", index_path, root / "egg/egg-rocher-suchard-packwiz-neoforge.json"]:
         target = dist / path.name
         shutil.copyfile(path, target)
