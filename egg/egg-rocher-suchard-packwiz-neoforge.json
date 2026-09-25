@@ -17,7 +17,7 @@
     "Java 21": "ghcr.io/pterodactyl/yolks:java_21"
   },
   "file_denylist": [],
-  "startup": "if [ ! -f \"libraries/net/neoforged/neoforge/{{NEOFORGE_VERSION}}/unix_args.txt\" ]; then curl -fsSL --retry 3 --retry-delay 2 \"https://maven.neoforged.net/releases/net/neoforged/neoforge/{{NEOFORGE_VERSION}}/neoforge-{{NEOFORGE_VERSION}}-installer.jar\" -o neoforge-installer.jar || exit 1; java -jar neoforge-installer.jar --installServer || exit 1; rm -f neoforge-installer.jar; fi; java -jar packwiz-installer-bootstrap.jar -g -s server \"{{PACKWIZ_URL}}\" || exit 1; exec java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true @user_jvm_args.txt @libraries/net/neoforged/neoforge/{{NEOFORGE_VERSION}}/unix_args.txt nogui",
+  "startup": "bash start.sh",
   "config": {
     "files": "{\n    \"server.properties\": {\n        \"parser\": \"properties\",\n        \"find\": {\n            \"server-ip\": \"0.0.0.0\",\n            \"server-port\": \"{{server.build.default.port}}\",\n            \"query.port\": \"{{server.build.default.port}}\"\n        }\n    }\n}",
     "startup": "{\n    \"done\": \")! For help, type \\\"help\\\"\"\n}",
@@ -26,7 +26,7 @@
   },
   "scripts": {
     "installation": {
-      "script": "#!/bin/bash\nset -euo pipefail\n\ncd /mnt/server\napt-get update\napt-get install -y --no-install-recommends ca-certificates curl\n\ncurl -fsSL --retry 3 --retry-delay 2 \\\n  \"https://maven.neoforged.net/releases/net/neoforged/neoforge/${NEOFORGE_VERSION}/neoforge-${NEOFORGE_VERSION}-installer.jar\" \\\n  -o neoforge-installer.jar\ncurl -fsSL --retry 3 --retry-delay 2 \\\n  \"https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar\" \\\n  -o packwiz-installer-bootstrap.jar\n\nprintf 'eula=true\\n' > eula.txt\n",
+      "script": "#!/bin/bash\nset -euo pipefail\n\ncd /mnt/server\napt-get update\napt-get install -y --no-install-recommends ca-certificates curl\n\ncurl -fsSL --retry 3 --retry-delay 2 \\\n  \"https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar\" \\\n  -o packwiz-installer-bootstrap.jar\n\ncat > start.sh <<'EOF'\n#!/bin/bash\nset -euo pipefail\n\ncd /home/container\n\nNEOFORGE_ARGS=\"libraries/net/neoforged/neoforge/${NEOFORGE_VERSION}/unix_args.txt\"\n\nif [ ! -f \"${NEOFORGE_ARGS}\" ]; then\n    echo \"Installing NeoForge ${NEOFORGE_VERSION}...\"\n\n    curl -fsSL --retry 3 --retry-delay 2 \\\n      \"https://maven.neoforged.net/releases/net/neoforged/neoforge/${NEOFORGE_VERSION}/neoforge-${NEOFORGE_VERSION}-installer.jar\" \\\n      -o neoforge-installer.jar\n\n    java -jar neoforge-installer.jar --installServer\n    rm -f neoforge-installer.jar\nfi\n\necho \"Synchronizing Packwiz from ${PACKWIZ_URL}...\"\njava -jar packwiz-installer-bootstrap.jar -g -s server \"${PACKWIZ_URL}\"\n\necho \"Starting NeoForge ${NEOFORGE_VERSION}...\"\nexec java \\\n  -Xms128M \\\n  -XX:MaxRAMPercentage=95.0 \\\n  -Dterminal.jline=false \\\n  -Dterminal.ansi=true \\\n  @user_jvm_args.txt \\\n  @\"${NEOFORGE_ARGS}\" \\\n  nogui\nEOF\n\nchmod +x start.sh\nprintf 'eula=true\\n' > eula.txt\n",
       "container": "ghcr.io/pterodactyl/installers:debian",
       "entrypoint": "bash"
     }
