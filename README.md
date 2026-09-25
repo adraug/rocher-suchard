@@ -118,7 +118,7 @@ version (`1.1` becomes `1.1.0`); subsequent merges increment the patch version
 
 Each release includes:
 
-- `Rocher Suchard-<version>.mrpack` for launchers.
+- `Rocher-Suchard-<version>.mrpack` for launchers (release filenames use hyphens).
 - `pack.toml` and `index.toml` for inspection or download.
 - `Rocher-Suchard-<version>-packwiz.zip`, containing the complete Packwiz tree
   (pack, index, mod metadata, configurations and other indexed files), ready to
