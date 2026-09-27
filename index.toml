@@ -617,6 +617,18 @@ file = "config/onlyhammersandexcavators-common.toml"
 hash = "bc1599dd50296a05d75fade42c60cf9923eb9cd1b7012ad3e318026976acfad6"
 
 [[files]]
+file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/data/minecraft/tags/function/tick.json"
+hash = "c8a83f5223db21d871e053b835f98c10aa31a882b001731ea274002a8a2ed73d"
+
+[[files]]
+file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/data/rocher_suchard/function/neoenchant_autosmelt_cleanup.mcfunction"
+hash = "7a2eeaf5438f2212dde66546df03d7f2fb250af3053ad4dcef0a72d59f7753a4"
+
+[[files]]
+file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/pack.mcmeta"
+hash = "0fc0a77803965701691805a2a54512c24e80fac6e48da745f5155e19a5d02aaf"
+
+[[files]]
 file = "config/placebo.cfg"
 hash = "6bbc71c6dc18b1ba4952e1bc54ed2b98c3a90f04cec4257ec3f7566cdf0c0e2a"
 
@@ -1269,6 +1281,11 @@ metafile = true
 [[files]]
 file = "mods/owo-lib.pw.toml"
 hash = "3db5943419e6b6f4e33946266be8797230434573bc68dbe3a77d72f19001ae0c"
+metafile = true
+
+[[files]]
+file = "mods/paxi.pw.toml"
+hash = "6687e36a2a2ec20d7a2539df2a1df2b8de8603c19cc768a1053c583c6756b7a1"
 metafile = true
 
 [[files]]
