@@ -5,18 +5,6 @@ file = ".dockerignore"
 hash = "5e7ce13961b8df2a1858a552694054b29e3eaddd658fbcb5b234a28087761cb5"
 
 [[files]]
-file = "config/DistantHorizons.toml"
-hash = "f57fe6fef9c4e391cf394f0a9572b27a1c7465019a24c37ad01755dc84e5a3c1"
-
-[[files]]
-file = "config/MouseTweaks.cfg"
-hash = "4069ce1a439d8c37453c1b1e9f2037e0942674c7e48723a39b37eab245792ad4"
-
-[[files]]
-file = "config/Veinminer/settings.json"
-hash = "e9e5119a09b200f218354d9530ed0fd946f322ecfe4b5b4f55d30e2c8de3594b"
-
-[[files]]
 file = "config/accessories.json5"
 hash = "b9f6a56acdb02a286de9aa06578dac5485656fb476adc819fb3c63dd49ad0785"
 
@@ -481,6 +469,10 @@ file = "config/deeperdarker-common.toml"
 hash = "6fc0146c17f0e2c53509f79dd77a6d1d8e6a50a122ceee0bd0cd24befc4e2e26"
 
 [[files]]
+file = "config/DistantHorizons.toml"
+hash = "f57fe6fef9c4e391cf394f0a9572b27a1c7465019a24c37ad01755dc84e5a3c1"
+
+[[files]]
 file = "config/dmr-client.toml"
 hash = "f60189547a4002e0612647f6a22c260e44d0ccae515ad66731ab067a8e8907c0"
 
@@ -513,6 +505,14 @@ file = "config/entityculling.json"
 hash = "e92e6772c4b6ec28b9c179c80831d56d11fc65064591424a120133d397b2ab49"
 
 [[files]]
+file = "config/exposure_polaroid-client.toml"
+hash = "a5b310842f230d58680375561bfaf43db571ce0c6f2a5e5ad5559f7bb51433b6"
+
+[[files]]
+file = "config/exposure_polaroid-server.toml"
+hash = "09d330b29443d9579ecc014f2be2fcb31075bfe1e9f9ac4e750f271128650fe6"
+
+[[files]]
 file = "config/exposure-client.toml"
 hash = "cd8c2d6ef4dd823580b0e735f3f0049d5be109928520ec7e1d72f8668a16afef"
 
@@ -523,14 +523,6 @@ hash = "f437a2bff2337eecc996f8d0d17d348403eae070045dfbd37065c6fcb79ce6ce"
 [[files]]
 file = "config/exposure-server.toml"
 hash = "a4e7d2d6bac537024dda0a613d6edfbb114cb4971e692e010cf5a43cb743e675"
-
-[[files]]
-file = "config/exposure_polaroid-client.toml"
-hash = "a5b310842f230d58680375561bfaf43db571ce0c6f2a5e5ad5559f7bb51433b6"
-
-[[files]]
-file = "config/exposure_polaroid-server.toml"
-hash = "09d330b29443d9579ecc014f2be2fcb31075bfe1e9f9ac4e750f271128650fe6"
 
 [[files]]
 file = "config/farmersdelight-client.toml"
@@ -601,6 +593,10 @@ file = "config/mezz_config/client/default/settings.ini"
 hash = "1febf6ff1d35f4ffe34d6e5444e3c9496155a6abf3f49eb4ef5650d102645249"
 
 [[files]]
+file = "config/MouseTweaks.cfg"
+hash = "4069ce1a439d8c37453c1b1e9f2037e0942674c7e48723a39b37eab245792ad4"
+
+[[files]]
 file = "config/neoforge-client.toml"
 hash = "d58d93e2c429410d0abf25507d1679f732e1023b03bb52414348efcf5cf3ddb0"
 
@@ -615,6 +611,18 @@ hash = "b1e3b38d612295f8d9dfa0fbdb538a992b7a1a3b7a766c491b4e9fdf3823396f"
 [[files]]
 file = "config/onlyhammersandexcavators-common.toml"
 hash = "bc1599dd50296a05d75fade42c60cf9923eb9cd1b7012ad3e318026976acfad6"
+
+[[files]]
+file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/data/minecraft/tags/function/tick.json"
+hash = "c8a83f5223db21d871e053b835f98c10aa31a882b001731ea274002a8a2ed73d"
+
+[[files]]
+file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/data/rocher_suchard/function/neoenchant_autosmelt_cleanup.mcfunction"
+hash = "7a2eeaf5438f2212dde66546df03d7f2fb250af3053ad4dcef0a72d59f7753a4"
+
+[[files]]
+file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/pack.mcmeta"
+hash = "0fc0a77803965701691805a2a54512c24e80fac6e48da745f5155e19a5d02aaf"
 
 [[files]]
 file = "config/placebo.cfg"
@@ -699,6 +707,10 @@ hash = "a50b4ca77d21ae105e68560c1af694125ea06360374c82e87f4da54b7ecfa51d"
 [[files]]
 file = "config/vanityslots-server.toml"
 hash = "d4944e8edee2f73d6701895d6bbac5d5bece2db42bdefe4739b2f7a574f9b8e1"
+
+[[files]]
+file = "config/Veinminer/settings.json"
+hash = "e9e5119a09b200f218354d9530ed0fd946f322ecfe4b5b4f55d30e2c8de3594b"
 
 [[files]]
 file = "config/waystones-common.toml"
@@ -842,6 +854,11 @@ hash = "07f30551060d5eb77a36ad9eb26131751d790d8e43378faf4143c6f53f0da245"
 metafile = true
 
 [[files]]
+file = "mods/cc_modern.pw.toml"
+hash = "2795701da84a1afb0e405b028f2a22e5d13aa29ea07faf2bb9fb18e58e1b4e3b"
+metafile = true
+
+[[files]]
 file = "mods/cc-redstone-link-bridge.pw.toml"
 hash = "791a6138f2501b4e3d2695bc6f95d207da57872cb7a32074a6236a264e43cb7f"
 metafile = true
@@ -854,11 +871,6 @@ metafile = true
 [[files]]
 file = "mods/cc-watermedia.pw.toml"
 hash = "2c10a27c51f3b35268b10f017fe6414430843a75855c5ccdace0a9649cf7e4d8"
-metafile = true
-
-[[files]]
-file = "mods/cc_modern.pw.toml"
-hash = "2795701da84a1afb0e405b028f2a22e5d13aa29ea07faf2bb9fb18e58e1b4e3b"
 metafile = true
 
 [[files]]
@@ -909,6 +921,11 @@ metafile = true
 [[files]]
 file = "mods/controlling.pw.toml"
 hash = "65c8086d2ec3d39acc7bd36c7a0306ccc43b602b38fa07d13291bc478ef7dfff"
+metafile = true
+
+[[files]]
+file = "mods/create_oxidized.pw.toml"
+hash = "7e9e3d04c85d0a94a449245bae9239658e0fdeaf53043145c70d54070a38b9b0"
 metafile = true
 
 [[files]]
@@ -1024,11 +1041,6 @@ metafile = true
 [[files]]
 file = "mods/create.pw.toml"
 hash = "dcaf5f2e28db0b9a127d0167456832341045ddc9aec058c3d9fcf53f618d2404"
-metafile = true
-
-[[files]]
-file = "mods/create_oxidized.pw.toml"
-hash = "7e9e3d04c85d0a94a449245bae9239658e0fdeaf53043145c70d54070a38b9b0"
 metafile = true
 
 [[files]]
@@ -1269,6 +1281,11 @@ metafile = true
 [[files]]
 file = "mods/owo-lib.pw.toml"
 hash = "3db5943419e6b6f4e33946266be8797230434573bc68dbe3a77d72f19001ae0c"
+metafile = true
+
+[[files]]
+file = "mods/paxi.pw.toml"
+hash = "6687e36a2a2ec20d7a2539df2a1df2b8de8603c19cc768a1053c583c6756b7a1"
 metafile = true
 
 [[files]]
