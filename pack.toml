@@ -1,12 +1,12 @@
 name = "Rocher Suchard"
 author = "Adraug"
-version = "1.1"
+version = "1.1.5"
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "4330866c2fc81da4a5306abe148fc580886c435baf8497603ceb4ce808bda617"
+hash = "254d5ed5c619cc1bed5d5feeeb36ca6e464a2793d363d53d86e9eed51c3176e6"
 
 [versions]
 minecraft = "1.21.1"
