@@ -1,0 +1,13 @@
+name = "Compat API"
+filename = "compatapi-1.0.3.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/CiogECPw/versions/hP7FrhO7/compatapi-1.0.3.jar"
+hash-format = "sha512"
+hash = "bb320f97ab1b7eaa4e3280e6c108a5b8c5227d990f725f3ea7017cfd1c5e32cff56ec1e002d72833b2681b82628c4e5a5b59d1194265a25387286f5217f0f2fb"
+
+[update]
+[update.modrinth]
+mod-id = "CiogECPw"
+version = "hP7FrhO7"
