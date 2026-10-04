@@ -929,6 +929,11 @@ hash = "4892513825f87217b6cc3f4d3ec4dcd3965b96dede8cc10d6578c4769102ae8e"
 metafile = true
 
 [[files]]
+file = "mods/corgilib.pw.toml"
+hash = "2b8c5286980b8d864085d02a6b2153cefa401a965833139ffac8e7661a322f7c"
+metafile = true
+
+[[files]]
 file = "mods/create-addon-organizer.pw.toml"
 hash = "5898e378826f4587837109defa040b23b52f222e4abe957488224700d6797b68"
 metafile = true
@@ -1284,6 +1289,11 @@ hash = "51e129832b04acd57da470fc41725bad5e101b6a6b1d4901fd8ea7a92b14e13d"
 metafile = true
 
 [[files]]
+file = "mods/lithostitched.pw.toml"
+hash = "0294264654da6777cfbbbd24ffa6dd1d082768fa7ae28b36b76f78261f53fce9"
+metafile = true
+
+[[files]]
 file = "mods/lodestonelib.pw.toml"
 hash = "f5d0701055478e980b50849f199f266e6ab1940277a17ad2e5060df0d978be83"
 metafile = true
@@ -1334,6 +1344,16 @@ hash = "929fd2e18b356d883f6fdeee9b515f4026d320f0d0610656534f3db3b4d21d3c"
 metafile = true
 
 [[files]]
+file = "mods/oh-the-biomes-weve-gone.pw.toml"
+hash = "fdaa22d49ee4987c2d0c012e24c7b44d50a653519767d18371e8d778c188f184"
+metafile = true
+
+[[files]]
+file = "mods/oh-the-trees-youll-grow.pw.toml"
+hash = "86170568e6caa3199eb2b87370a6f386e0b59ccce65866edc011b565473a2811"
+metafile = true
+
+[[files]]
 file = "mods/only-hammers-and-excavators.pw.toml"
 hash = "55cc6f2302ee40a698814b2d322a2ad1b8496f24ed304a837f42c67f8eb6d029"
 metafile = true
@@ -1376,6 +1396,11 @@ metafile = true
 [[files]]
 file = "mods/rechiseled.pw.toml"
 hash = "6bee7be8af8f9247fbf84dcd1ec9af2adaa42e55d52ab8a5bfe9b6ff7c94da46"
+metafile = true
+
+[[files]]
+file = "mods/regions-unexplored.pw.toml"
+hash = "9a94f2e57b081963d11a33a9be6435046bfb8720defac9d2cced4d37b3db7299"
 metafile = true
 
 [[files]]
