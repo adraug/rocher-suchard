@@ -835,7 +835,7 @@ metafile = true
 
 [[files]]
 file = "mods/artifacts.pw.toml"
-hash = "416b7f130791397fb2ceb9e89ce3fd0e870f207c8e40b759c069cb58b7544314"
+hash = "93c413ff9f724a5e296b5fd628e652af46bef38bcc2d9f720546797c96700f52"
 metafile = true
 
 [[files]]
@@ -1190,7 +1190,7 @@ metafile = true
 
 [[files]]
 file = "mods/distanthorizons.pw.toml"
-hash = "6d3e312dbf8db12dd1b6fb3bd1d29f210ab48024a0b2ebdf02fd32c265955c5d"
+hash = "c3e0dd6a4bac728f3f892616af7e78ce363df113b0fe11daf95f17a32d68ef1a"
 metafile = true
 
 [[files]]
