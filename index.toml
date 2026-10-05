@@ -943,10 +943,6 @@ file = "mods/compat-api.pw.toml"
 hash = "e9087ec845c8f31dcb4ee6e73090df6c1b20416e49f34f5f735bae0f3086d543"
 metafile = true
 
-[[files]]
-file = "mods/compat-artifacts.pw.toml"
-hash = "fe3b6212f1cb10c089294745ae44efc244ff0139788b115334814a525be513ad"
-metafile = true
 
 [[files]]
 file = "mods/configured.pw.toml"
