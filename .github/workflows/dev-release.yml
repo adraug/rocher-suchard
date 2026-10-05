@@ -1,0 +1,53 @@
+name: Release development modpack
+
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Independent from stable releases. Serialize publications, including retries.
+concurrency:
+  group: modpack-dev-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.4'
+          cache: false
+      - name: Test release tooling
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py' -v
+      - name: Install Packwiz
+        run: go install github.com/packwiz/packwiz@v0.0.0-20260906154125-ef87d964f8cb
+      - name: Prepare development version
+        id: version
+        run: python3 .github/scripts/dev_release.py prepare
+      - name: Export and verify release assets
+        run: |
+          make export
+          python3 .github/scripts/release_assets.py
+      - name: Build Prism DEV instance
+        run: |
+          curl -fL --retry 3 https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar -o "$RUNNER_TEMP/packwiz-installer-bootstrap.jar"
+          python3 .github/scripts/dev_release.py prism --bootstrap "$RUNNER_TEMP/packwiz-installer-bootstrap.jar"
+      - name: Publish isolated prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ steps.version.outputs.tag }}
+          REUSED: ${{ steps.version.outputs.reused }}
+        run: bash .github/scripts/publish_dev.sh

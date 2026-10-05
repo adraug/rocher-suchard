@@ -55,3 +55,9 @@ serveur ou sur l'ancien serveur.
 
 `MEMORY` est réglé à 4 Go pour le test local. Ajustez cette valeur dans
 `compose.yaml` si la machine hôte le nécessite.
+
+## Canal de développement
+
+Pour suivre `dev-latest` sur un serveur séparé et une instance Prism dédiée,
+consulter le [guide DEV](../deploy/DEV.md). Le serveur stable conserve son URL
+`latest`.
