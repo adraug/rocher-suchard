@@ -1,0 +1,13 @@
+name = "Create: Addon Organizer"
+filename = "createaddonorganizer-1.5__1.21.1.jar"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/CKNIaFKn/versions/zjKBE4F8/createaddonorganizer-1.5__1.21.1.jar"
+hash-format = "sha512"
+hash = "f6fd494d10ab050bbe96a1aad7dd0dd543e087c76334829444d8974064794abf5634003c884fef1dec95d85d281ca8cacce819dc5c2783a65f87d9b75f9a6d63"
+
+[update]
+[update.modrinth]
+mod-id = "CKNIaFKn"
+version = "zjKBE4F8"

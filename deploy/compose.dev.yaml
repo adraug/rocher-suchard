@@ -1,0 +1,19 @@
+# Published development channel; independent from the local-source compose.yaml.
+name: rocher-suchard-dev
+services:
+  minecraft:
+    image: itzg/minecraft-server:java21
+    ports:
+      - "127.0.0.1:25566:25565"
+    environment:
+      EULA: "TRUE"
+      TYPE: "NEOFORGE"
+      VERSION: "1.21.1"
+      NEOFORGE_VERSION: "21.1.251"
+      PACKWIZ_URL: "${DEV_PACKWIZ_URL:-https://raw.githubusercontent.com/adraug/rocher-suchard/refs/heads/dev-latest/pack.toml}"
+      MEMORY: "4G"
+      MOTD: "Rocher Suchard DEV — serveur de test"
+    volumes:
+      - ./data-dev:/data
+    stdin_open: true
+    tty: true
