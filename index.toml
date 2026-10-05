@@ -6,7 +6,7 @@ hash = "5e7ce13961b8df2a1858a552694054b29e3eaddd658fbcb5b234a28087761cb5"
 
 [[files]]
 file = "config/DistantHorizons.toml"
-hash = "f57fe6fef9c4e391cf394f0a9572b27a1c7465019a24c37ad01755dc84e5a3c1"
+hash = "f78c0d3689026bdaefca2b63d22cf5540e66d60bb514aacd8e3f2ace288ade15"
 
 [[files]]
 file = "config/MouseTweaks.cfg"
@@ -942,7 +942,6 @@ metafile = true
 file = "mods/compat-api.pw.toml"
 hash = "e9087ec845c8f31dcb4ee6e73090df6c1b20416e49f34f5f735bae0f3086d543"
 metafile = true
-
 
 [[files]]
 file = "mods/configured.pw.toml"
