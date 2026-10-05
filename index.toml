@@ -622,7 +622,7 @@ hash = "c8a83f5223db21d871e053b835f98c10aa31a882b001731ea274002a8a2ed73d"
 
 [[files]]
 file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/data/rocher_suchard/function/neoenchant_autosmelt_cleanup.mcfunction"
-hash = "7a2eeaf5438f2212dde66546df03d7f2fb250af3053ad4dcef0a72d59f7753a4"
+hash = "6ac7c50e711d47e037423c70998ee3e9cc15852366f7cbc29858aaf8204806ce"
 
 [[files]]
 file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/pack.mcmeta"

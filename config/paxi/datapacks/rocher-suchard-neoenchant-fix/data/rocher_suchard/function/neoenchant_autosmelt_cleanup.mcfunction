@@ -1,4 +1,6 @@
-# NeoEnchant 5.14.0 can leave its temporary Auto Smelt markers on dropped items.
-# Only target item entities carrying both NeoEnchant markers, then remove the
-# custom_data component so the resulting stack is identical to the smelting result.
-execute as @e[type=minecraft:item,nbt={Item:{components:{"minecraft:custom_data":{ne_auto_smelt_xp:1b,ne_auto_smelt_drops_xp:1b}}}}] run data remove entity @s Item.components."minecraft:custom_data"
+# NeoEnchant 5.14.0 removes its Auto Smelt markers after awarding XP, but leaves
+# custom_data={}. An empty component still prevents stacking with normal drops.
+# Leave all nonempty data (including pending XP markers) to its owning mod.
+# Item component equality is exact: unlike an NBT {} selector, this cannot match
+# nonempty compounds. Also repairs old empty-data stacks when dropped again.
+execute as @e[type=minecraft:item] if items entity @s contents *[minecraft:custom_data={}] run data remove entity @s Item.components."minecraft:custom_data"
