@@ -151,6 +151,14 @@ make push     # push the current branch
 `make pull` and `make push` require a configured upstream remote. The current
 checkout does not have one, so configure it before using those targets.
 
+## Development channel
+
+See [the DEV setup guide](deploy/DEV.md) for automatic `dev` prereleases,
+a separate Calagopus/local server and a self-updating Prism instance.
+Stable clients and servers continue to follow `latest`; development installs
+follow `dev-latest`. The channel becomes available after the first successful
+development publication.
+
 ## Local server test
 
 The [deploy/README.md](deploy/README.md) instructions start a local NeoForge

@@ -74,3 +74,9 @@ version demandée avant la synchronisation Packwiz.
 La version 1.0 correspond au pack Prism initial partagé entre amis ; la
 version 1.1 ajoute du contenu. Utilisez des clients et un serveur avec la même
 version du pack et vérifiez leur compatibilité avant publication.
+
+## Canal de développement
+
+Pour suivre `dev-latest` sur un serveur séparé et une instance Prism dédiée,
+consulter le [guide DEV](../deploy/DEV.md). Le serveur stable conserve son URL
+`latest`.
