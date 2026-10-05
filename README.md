@@ -158,6 +158,22 @@ server with Docker Compose directly from this Packwiz source. The environment
 installs server-only and shared mods only, so it can validate compatibility
 with both the original Prism client and the optimized client.
 
+### NeoEnchant Auto Smelt stacking
+
+The compatibility datapack removes exactly empty `minecraft:custom_data`
+components from dropped items. NeoEnchant keeps control of its XP processing;
+nonempty custom data and other item components are preserved.
+
+After updating the server (or the single-player instance), drop previously
+affected ingots on the ground and pick them up again. Items left in inventories,
+chests or backpacks are not rewritten. Items with other component differences
+may still legitimately refuse to stack.
+
+The [datapack regression checks](.github/tests/neoenchant/README.md) cover empty
+data, preservation of nonempty data and merging with a normal ingot. Before
+release, also mine with Auto Smelt in the full pack and check XP and stacking
+with both client profiles.
+
 ## Calagopus deployment
 
 The [egg/README.md](egg/README.md) guide contains a Calagopus/Pterodactyl egg
