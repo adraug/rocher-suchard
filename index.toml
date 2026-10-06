@@ -5,10 +5,6 @@ file = ".dockerignore"
 hash = "5e7ce13961b8df2a1858a552694054b29e3eaddd658fbcb5b234a28087761cb5"
 
 [[files]]
-file = "config/DistantHorizons.toml"
-hash = "f57fe6fef9c4e391cf394f0a9572b27a1c7465019a24c37ad01755dc84e5a3c1"
-
-[[files]]
 file = "config/MouseTweaks.cfg"
 hash = "4069ce1a439d8c37453c1b1e9f2037e0942674c7e48723a39b37eab245792ad4"
 
@@ -1186,7 +1182,7 @@ metafile = true
 
 [[files]]
 file = "mods/distanthorizons.pw.toml"
-hash = "c3e0dd6a4bac728f3f892616af7e78ce363df113b0fe11daf95f17a32d68ef1a"
+hash = "0c20fea3407ed0db85b4b171f1820a24987f2659946fadd30bae044205041b09"
 metafile = true
 
 [[files]]
@@ -1587,11 +1583,6 @@ metafile = true
 [[files]]
 file = "mods/spark.pw.toml"
 hash = "5995decc8738d7ddccec218dfa1ed95db9eca5bb64c98fd2cede8bf9bbc837c2"
-metafile = true
-
-[[files]]
-file = "mods/ssrd.pw.toml"
-hash = "aa584566e7edf979e1cc8ea3c5d812224c8223add42fa06f8c3d81a84b88ed57"
 metafile = true
 
 [[files]]
