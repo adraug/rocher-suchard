@@ -59,6 +59,37 @@ n'interprète prématurément les constructions shell (`if`, `then`, etc.).
 L'egg écrit également `eula=true` et configure `server.properties` avec le
 port attribué par le panel.
 
+## Mémoire JVM par serveur
+
+Les réglages de mémoire Java sont exposés comme variables éditables dans
+Calagopus, indépendamment de la limite RAM du conteneur :
+
+| Variable | Défaut | Valeurs admises |
+| --- | --- | --- |
+| `JVM_INITIAL_RAM_PERCENTAGE` | `25` | Entier de 1 à 90 |
+| `JVM_MAX_RAM_PERCENTAGE` | `75` | Entier de 1 à 90 |
+
+Le pourcentage initial doit être inférieur ou égal au maximum. Java calcule les
+tailles du heap par rapport à la mémoire disponible pour la JVM (normalement la
+limite mémoire du conteneur Docker avec Java 21). Avec un serveur limité à
+16 Gio, les valeurs par défaut donnent environ 4 Gio au démarrage et 12 Gio
+maximum, tout en réservant une marge pour la mémoire hors heap. Le script
+refuse les valeurs invalides avant l'installation/synchronisation des mods.
+
+Le fichier `user_jvm_args.txt` reste chargé : s'il contient des options de
+heap actives (`-Xms`, `-Xmx`, `-XX:InitialRAMPercentage`,
+`-XX:MaxRAMPercentage`), celles-ci peuvent prendre le dessus sur les variables
+de l'egg. Le script affiche alors un avertissement ; supprimez ces options du
+fichier pour piloter la mémoire uniquement depuis Calagopus. Les lignes
+commentées du fichier ne déclenchent pas l'avertissement.
+
+**Serveurs déjà installés :** l'import d'un egg mis à jour ne régénère pas
+automatiquement leur fichier `start.sh`, créé pendant l'installation de
+l'egg. Après import, vérifiez la présence des nouvelles variables dans le
+panel, puis mettez à jour `start.sh` sur chaque serveur existant (ou
+réexécutez l'installation uniquement après sauvegarde complète et vérification
+de ses effets). Une simple synchronisation Packwiz ne modifie pas ce script.
+
 ## Mettre le serveur à jour
 
 1. Commitez et publiez les sources Packwiz, y compris `pack.toml` et
