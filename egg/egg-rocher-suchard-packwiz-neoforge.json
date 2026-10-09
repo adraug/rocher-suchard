@@ -26,7 +26,7 @@
   },
   "scripts": {
     "installation": {
-      "script": "#!/bin/bash\nset -euo pipefail\n\ncd /mnt/server\napt-get update\napt-get install -y --no-install-recommends ca-certificates curl\n\ncurl -fsSL --retry 3 --retry-delay 2 \\\n  \"https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar\" \\\n  -o packwiz-installer-bootstrap.jar\n\ncat > start.sh <<'EOF'\n#!/bin/bash\nset -euo pipefail\n\ncd /home/container\n\nNEOFORGE_ARGS=\"libraries/net/neoforged/neoforge/${NEOFORGE_VERSION}/unix_args.txt\"\n\nif [ ! -f \"${NEOFORGE_ARGS}\" ]; then\n    echo \"Installing NeoForge ${NEOFORGE_VERSION}...\"\n\n    curl -fsSL --retry 3 --retry-delay 2 \\\n      \"https://maven.neoforged.net/releases/net/neoforged/neoforge/${NEOFORGE_VERSION}/neoforge-${NEOFORGE_VERSION}-installer.jar\" \\\n      -o neoforge-installer.jar\n\n    java -jar neoforge-installer.jar --installServer\n    rm -f neoforge-installer.jar\nfi\n\necho \"Synchronizing Packwiz from ${PACKWIZ_URL}...\"\njava -jar packwiz-installer-bootstrap.jar -g -s server \"${PACKWIZ_URL}\"\n\necho \"Starting NeoForge ${NEOFORGE_VERSION}...\"\nexec java \\\n  -Xms128M \\\n  -XX:MaxRAMPercentage=95.0 \\\n  -Dterminal.jline=false \\\n  -Dterminal.ansi=true \\\n  @user_jvm_args.txt \\\n  @\"${NEOFORGE_ARGS}\" \\\n  nogui\nEOF\n\nchmod +x start.sh\nprintf 'eula=true\\n' > eula.txt\n",
+      "script": "#!/bin/bash\nset -euo pipefail\n\ncd /mnt/server\napt-get update\napt-get install -y --no-install-recommends ca-certificates curl\n\ncurl -fsSL --retry 3 --retry-delay 2 \\\n  \"https://github.com/packwiz/packwiz-installer-bootstrap/releases/download/v0.0.3/packwiz-installer-bootstrap.jar\" \\\n  -o packwiz-installer-bootstrap.jar\n\ncat > start.sh <<'EOF'\n#!/bin/bash\nset -euo pipefail\n\ncd /home/container\n\n# Configure heap percentages relative to the Java container memory limit.\nJVM_INITIAL_RAM_PERCENTAGE=\"${JVM_INITIAL_RAM_PERCENTAGE:-25}\"\nJVM_MAX_RAM_PERCENTAGE=\"${JVM_MAX_RAM_PERCENTAGE:-75}\"\n\nif [[ ! \"$JVM_INITIAL_RAM_PERCENTAGE\" =~ ^([1-9]|[1-8][0-9]|90)$ ||\n      ! \"$JVM_MAX_RAM_PERCENTAGE\" =~ ^([1-9]|[1-8][0-9]|90)$ ]]; then\n    echo \"JVM RAM percentages must be whole numbers between 1 and 90.\" >&2\n    exit 1\nfi\nif (( JVM_INITIAL_RAM_PERCENTAGE > JVM_MAX_RAM_PERCENTAGE )); then\n    echo \"JVM initial RAM percentage must not exceed the maximum.\" >&2\n    exit 1\nfi\n\nNEOFORGE_ARGS=\"libraries/net/neoforged/neoforge/${NEOFORGE_VERSION}/unix_args.txt\"\n\nif [ ! -f \"${NEOFORGE_ARGS}\" ]; then\n    echo \"Installing NeoForge ${NEOFORGE_VERSION}...\"\n\n    curl -fsSL --retry 3 --retry-delay 2 \\\n      \"https://maven.neoforged.net/releases/net/neoforged/neoforge/${NEOFORGE_VERSION}/neoforge-${NEOFORGE_VERSION}-installer.jar\" \\\n      -o neoforge-installer.jar\n\n    java -jar neoforge-installer.jar --installServer\n    rm -f neoforge-installer.jar\nfi\n\necho \"Synchronizing Packwiz from ${PACKWIZ_URL}...\"\njava -jar packwiz-installer-bootstrap.jar -g -s server \"${PACKWIZ_URL}\"\n\n# Warn if custom JVM arguments explicitly override heap sizing.\nif [ -f user_jvm_args.txt ] &&\n   grep -Ev '^[[:space:]]*(#|$)' user_jvm_args.txt |\n   grep -Eq -- '(^|[[:space:]])(-Xms|-Xmx|-XX:(InitialRAMPercentage|MaxRAMPercentage)=)'; then\n    echo \"WARNING: user_jvm_args.txt contains heap options that can override JVM RAM percentages.\" >&2\nfi\n\necho \"Starting NeoForge ${NEOFORGE_VERSION} (JVM heap: initial ${JVM_INITIAL_RAM_PERCENTAGE}%, max ${JVM_MAX_RAM_PERCENTAGE}%)...\"\nexec java \\\n  \"-XX:InitialRAMPercentage=${JVM_INITIAL_RAM_PERCENTAGE}\" \\\n  \"-XX:MaxRAMPercentage=${JVM_MAX_RAM_PERCENTAGE}\" \\\n  -Dterminal.jline=false \\\n  -Dterminal.ansi=true \\\n  @user_jvm_args.txt \\\n  @\"${NEOFORGE_ARGS}\" \\\n  nogui\nEOF\n\nchmod +x start.sh\nprintf 'eula=true\\n' > eula.txt\n",
       "container": "ghcr.io/pterodactyl/installers:debian",
       "entrypoint": "bash"
     }
@@ -50,6 +50,26 @@
       "user_viewable": true,
       "user_editable": true,
       "rules": "required|string|max:32",
+      "field_type": "text"
+    },
+    {
+      "name": "JVM Initial RAM Percentage",
+      "description": "Initial Java heap as a percentage of the container memory (whole number 1-90). Must not exceed JVM Max RAM Percentage.",
+      "env_variable": "JVM_INITIAL_RAM_PERCENTAGE",
+      "default_value": "25",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|integer|between:1,90",
+      "field_type": "text"
+    },
+    {
+      "name": "JVM Max RAM Percentage",
+      "description": "Maximum Java heap as a percentage of the container memory (whole number 1-90). Leave headroom for non-heap memory.",
+      "env_variable": "JVM_MAX_RAM_PERCENTAGE",
+      "default_value": "75",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|integer|between:1,90",
       "field_type": "text"
     }
   ]
