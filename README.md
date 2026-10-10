@@ -168,20 +168,26 @@ with both the original Prism client and the optimized client.
 
 ### NeoEnchant Auto Smelt stacking
 
-The compatibility datapack removes exactly empty `minecraft:custom_data`
-components from dropped items. NeoEnchant keeps control of its XP processing;
-nonempty custom data and other item components are preserved.
+The compatibility datapack fixes only vanilla ore-smelting outputs: iron ingots,
+gold ingots, copper ingots and netherite scraps. It does not modify Create zinc,
+other modded items or unrelated vanilla drops.
 
-After updating the server (or the single-player instance), drop previously
-affected ingots on the ground and pick them up again. Items left in inventories,
-chests or backpacks are not rewritten. Items with other component differences
-may still legitimately refuse to stack.
+NeoEnchant 5.14.0 can leave temporary XP markers on the dropped item. When
+**both** markers remain, the datapack finishes the pending XP award once
+(stored XP per item times drop count) before removing the markers. A lone
+orphaned marker is cleaned without a second XP award. An exactly empty
+`minecraft:custom_data` component is removed so normal ingots can stack;
+other custom data and item components are preserved.
 
-The [datapack regression checks](.github/tests/neoenchant/README.md) cover empty
-data, preservation of nonempty data and merging with a normal ingot. Before
-release, also mine with Auto Smelt in the full pack and check XP and stacking
-with both client profiles.
+After updating the server (or single-player instance), drop previously
+affected items onto the ground and pick them up again. Inventories,
+chests and backpacks are not rewritten directly. The cleanup is performed
+server-side in multiplayer; there is no client-side fix required to join.
 
+See the [datapack regression checks](.github/tests/neoenchant/README.md)
+for stack, XP and preservation tests. Before merging, mine the four vanilla
+ores with Auto Smelt on a NeoForge/Paxi development server to verify that
+the mod itself does not award XP again after our cleanup.
 ## Calagopus deployment
 
 The [egg/README.md](egg/README.md) guide contains a Calagopus/Pterodactyl egg

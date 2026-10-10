@@ -621,8 +621,20 @@ file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/data/minecraft/tags/
 hash = "c8a83f5223db21d871e053b835f98c10aa31a882b001731ea274002a8a2ed73d"
 
 [[files]]
+file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/data/rocher_suchard/function/neoenchant_autosmelt_award_xp.mcfunction"
+hash = "f61c120da20bc4eba493917781cd9c70ed2238ec39d2aa28c41e9c4de60d484e"
+
+[[files]]
 file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/data/rocher_suchard/function/neoenchant_autosmelt_cleanup.mcfunction"
-hash = "6ac7c50e711d47e037423c70998ee3e9cc15852366f7cbc29858aaf8204806ce"
+hash = "1f67c4995680982f5c6deced68532103d3807e9e8421a122bece319321a433c9"
+
+[[files]]
+file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/data/rocher_suchard/function/neoenchant_autosmelt_finalize.mcfunction"
+hash = "ebfc39d39d486ebeef51a7c11427c6d873073c6bd4871e21dbb44a2156f94c08"
+
+[[files]]
+file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/data/rocher_suchard/tags/item/vanilla_auto_smelt_outputs.json"
+hash = "19ead7a0e3769ca1574ea6ba8a95b87f41cf2cd418139bada95cc942765fc9e6"
 
 [[files]]
 file = "config/paxi/datapacks/rocher-suchard-neoenchant-fix/pack.mcmeta"

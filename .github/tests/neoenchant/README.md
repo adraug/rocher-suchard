@@ -1,43 +1,51 @@
 # Auto Smelt datapack regression checks
 
-Run these only in a disposable Minecraft Java 1.21.1 world. They summon test
-items, use the `rs_regression` scoreboard objective and remove their tagged
-entities afterwards. No test fixtures are included in Packwiz exports.
+Run these **only in a disposable Minecraft Java 1.21.1 world**. The tests
+create item entities and XP orbs and remove nearby entities in their test area.
 
 1. Copy `config/paxi/datapacks/rocher-suchard-neoenchant-fix` into the test
    world's `datapacks/` directory (vanilla), or let Paxi load it (full pack).
-2. Create a separate `datapacks/rs-test/pack.mcmeta` containing:
+2. Create `datapacks/rs-test/pack.mcmeta`:
 
    ```json
    {"pack":{"pack_format":48,"description":"Auto Smelt regression checks"}}
    ```
 
-3. Copy the two `.mcfunction` files in this directory into
+3. Copy `run.mcfunction` and `verify_merge.mcfunction` into
    `datapacks/rs-test/data/rs_test/function/`.
-4. Start the server, or run `reload`. From the server console, run:
+4. Start the server, or use `/reload`. Then, from console:
 
-   ```text
-   execute in minecraft:overworld run forceload add 0 0 31 15
+   ```mcfunction
+   execute in minecraft:overworld run forceload add 0 0 48 15
    execute in minecraft:overworld run function rs_test:run
    ```
 
-5. Allow at least 100 game ticks for the merge check. Expect all three messages
-   and no `RS_TEST_FAIL` or function-loading errors:
+5. After at least 100 game ticks, expect:
 
    ```text
-   RS_TEST_PASS component checks 8/8
+   RS_TEST_PASS component checks 13/13
+   RS_TEST_PASS XP values/count 4/4
+   RS_TEST_PASS XP exactly once
    RS_TEST_PASS idempotent
    RS_TEST_PASS vanilla stack merge
    ```
 
-6. Run `execute in minecraft:overworld run forceload remove 0 0 31 15`.
+   No `RS_TEST_FAIL` or datapack function loading errors should occur.
 
-The eight cases cover an empty component, an ordinary ingot, foreign data,
-both pending NeoEnchant markers plus foreign data, a single marker, a nested
-empty compound owned by another mod, a custom name plus empty data, and both
-pending markers alone. The final check confirms that a repaired old ingot and
-a normal ingot actually merge into a stack of two.
+6. Unforce the chunks:
 
-This verifies Minecraft command behavior, not NeoForge/Paxi integration or the
-complete modpack. Also test actual Auto Smelt mining, XP, and drop/pickup repair
-of existing ingots on the updated server with normal and optimized clients.
+   ```mcfunction
+   execute in minecraft:overworld run forceload remove 0 0 48 15
+   ```
+
+The 13 cases cover iron, gold, copper, and netherite scrap; exact XP value
+and stack Count; empty/nonempty custom data, orphaned NeoEnchant markers,
+non-XP components, non-vanilla-auto-smelt item IDs, and idempotence.
+A diamond carrying markers simulates an out-of-scope modded drop without
+needing Create installed.
+
+Before merging, **also test actual mining in NeoForge + Paxi + NeoEnchant
+5.14.0**, measuring XP, item stacks and old contaminated items dropped
+from inventory. Create zinc must remain unchanged and unsmelted.
+
+These are Minecraft command regression tests, not automatic in-game CI.
